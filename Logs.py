@@ -3,40 +3,50 @@ __version__ = '1.0.0'
 __date__ = '3.02.2024'
 
 import logging
-
-LEVELS = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
-
+from logging.handlers import RotatingFileHandler
 
 class Logs:
     """
-    Class Logs
-    The Logs class provides a simple interface for logging messages to a file and to the console using the
-    standard logging module.
+    The Logs class is used to set up logging handlers and add log messages.
+
+    Attributes:
+        log (logging.Logger): Logger object for logging messages.
+
+    Args:
+        name (str, optional): Name of the logger. Defaults to "default".
+        log_file (str, optional): Path to the log file. Defaults to None.
+        max_size (int, optional): Maximum size of log file in bytes. Defaults to 10**6.
+        backup (int, optional): Number of backup log files to keep. Defaults to 5.
+
     Methods:
-        - __init__(self, logger_name=None, log_file=None): Initializes the Logs object with a logger
-        name and log file path.
-        - add(self, level, msg): Adds a log message with the specified log level.
-    Example usage:
-        # Create an instance of the Logs class
-        logs = Logs(logger_name='my_logger', log_file='file.log')
-        # Add a log message with level DEBUG
-        logs.add('DEBUG', 'This is a debug message')
+        _setup_file_handler: Sets up file handler for logging to a file.
+        _setup_stream_handler: Sets up stream handler for logging to the console.
+        add: Adds a log message with the specified log level.
+
     """
-    def __init__(self, logger_name="default_logger", log_file=None):
-        self.logger = logging.getLogger(logger_name)
-        self.logger.setLevel(logging.DEBUG)
-        if not self.logger.handlers:
-            file_handler = logging.FileHandler(log_file)
-            file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-            file_handler.setFormatter(file_formatter)
-            self.logger.addHandler(file_handler)
-            stream_handler = logging.StreamHandler()
-            sformater = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-            stream_handler.setFormatter(sformater)
-            self.logger.addHandler(stream_handler)
+    def __init__(self, name="default", log_file=None, max_size=10**6, backup=5):
+        self.log = logging.getLogger(name)
+        self.log.setLevel(logging.DEBUG)
+        if not self.log.handlers:
+            self._setup_file_handler(log_file, max_size, backup)
+            self._setup_stream_handler()
+
+    def _setup_file_handler(self, log_file, max_size, backup):
+        f_format = '%(asctime)s - %(levelname)s - %(message)s'
+        f_handler = RotatingFileHandler(log_file, maxBytes=max_size, backupCount=backup)
+        f_handler.setFormatter(logging.Formatter(f_format))
+        self.log.addHandler(f_handler)
+
+    def _setup_stream_handler(self):
+        s_format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        s_handler = logging.StreamHandler()
+        s_handler.setFormatter(logging.Formatter(s_format))
+        self.log.addHandler(s_handler)
 
     def add(self, level, msg):
-        if level.upper() in LEVELS:
-            getattr(self.logger, level.lower())(msg)
+        try:
+            log_method = getattr(self.log, level.lower())
+        except AttributeError:
+            raise ValueError(f'Invalid logging level: {level}')
         else:
-            raise ValueError('Invalid logging level: ', level)
+            log_method(msg)
