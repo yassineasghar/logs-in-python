@@ -47,7 +47,15 @@ def test_rotation():
         logs.add('WARNING', f'Hello - i need 100 Bytes to')
 
 
+def test_exc():
+    logs = initiate_logs({'TST': LOG_CONFIG['TST']})
+    try:
+        logs['TST'].add('ERROR', f'Result : {100/0}')
+    except Exception as err:
+        logs['TST'].log_exception(str(err))
+
 if __name__ == '__main__':
     test_logs()
     test_init()
     test_rotation()
+    test_exc()

@@ -50,3 +50,12 @@ class Logs:
             raise ValueError(f'Invalid logging level: {level}')
         else:
             log_method(msg)
+
+    def log_exception(self, msg):
+        """
+        Adds an error log message and includes the current exception stack trace.
+
+        Args:
+            msg (str): The log message.
+        """
+        self.log.error(msg, exc_info=True)
