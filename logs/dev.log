@@ -1,0 +1,15 @@
+2024-02-03 02:59:49,671 - INFO - first number is : 34
+2024-02-03 02:59:49,672 - INFO - result of numbers is  : 77
+2024-02-03 02:59:49,672 - WARNING - hello i am a bad warning: 77
+2024-02-03 03:00:21,475 - INFO - first number is : 34
+2024-02-03 03:00:21,476 - INFO - result of numbers is  : 77
+2024-02-03 03:00:21,476 - WARNING - hello i am a bad warning: 77
+2024-02-03 03:00:37,368 - INFO - first number is : 34
+2024-02-03 03:00:37,369 - INFO - result of numbers is  : 77
+2024-02-03 03:00:37,369 - WARNING - hello i am a bad warning: 77
+2024-02-03 03:06:46,773 - INFO - first number is : 34
+2024-02-03 03:06:46,773 - WARNING - result of numbers is : 77
+2024-02-03 03:06:46,774 - WARNING - hello i am a bad warning: 77
+2024-02-03 03:10:57,412 - INFO - first number is : 34
+2024-02-03 03:10:57,413 - WARNING - result of numbers is : 77
+2024-02-03 03:10:57,413 - WARNING - hello i am a bad warning: 77
