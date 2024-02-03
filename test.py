@@ -50,9 +50,9 @@ def test_rotation():
 def test_exc():
     logs = initiate_logs({'TST': LOG_CONFIG['TST']})
     try:
-        logs['TST'].add('ERROR', f'Result : {100/0}')
+        result = 100 / 0  # This will raise a ZeroDivisionError
     except Exception as err:
-        logs['TST'].log_exception(str(err))
+        logs['TST'].catch('An error occurred: ' + str(err))
 
 if __name__ == '__main__':
     test_logs()

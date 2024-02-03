@@ -1,0 +1,7 @@
+2024-02-03 04:01:51,196 - WARNING - Hello - i need 10 Bytes to create a new log file 
+2024-02-03 04:01:51,196 - ERROR - An error occurred: division by zero
+Traceback (most recent call last):
+  File "/Users/yassineasghar/PycharmProjects/MyPython/1/test.py", line 53, in test_exc
+    result = 100 / 0  # This will raise a ZeroDivisionError
+             ~~~~^~~
+ZeroDivisionError: division by zero

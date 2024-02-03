@@ -51,7 +51,7 @@ class Logs:
         else:
             log_method(msg)
 
-    def log_exception(self, msg):
+    def catch(self, msg):
         """
         Adds an error log message and includes the current exception stack trace.
 
