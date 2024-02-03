@@ -22,7 +22,7 @@ def main():
     first_number = Something.validate(34)
     second_number = Something.validate(43)
 
-    dev_log.add('INFO', f'first number is : {first_number}')
+    dev_log.add('ERROR', f'first number is : {first_number}')
     ops_log.add('ERROR', f'second number is : {second_number}')
     result = first_number + second_number
     if first_number == second_number:
